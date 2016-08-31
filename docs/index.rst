@@ -34,6 +34,49 @@ And knots are kind of like a buggy version of knits.
 
 But to be clear the package name and command-line tool is ``stitch``.
 
+You'll also need to have a recent version of pandoc.
+Either use your system package manager, or use the ``pypandoc`` provided on conda-forge, which includes
+pandoc.
+
+Usage
+-----
+
+You write a markdown file, and include code chunks that look like
+
+
+.. code-block:: sh
+
+   ```{kernel_name, [chunk_name], **kwds}
+   # your code here
+   ```
+
+The ``kernel_name`` is required (see ``jupyter kernelspec list``).
+The ``chunk_name`` is optional; it controls things like the name assigned
+to plots if they're saved to disk.
+
+The supported keyword arguments are
+
+* eval: bool, whether to execute the code chunk
+* echo: bool, whether to include the input code chunk in the output
+
+More options will be added.
+
+The command-line interface is essentailly the same as pandocs.
+For the most part you call
+
+.. code-block:: sh
+
+   stitch input_file.md -o output_file.html
+
+You can use ``-t`` for the output type, or infer it from the file extension
+of ``-op``.
+All other options are passed through to pandoc.
+
+stitch defines a few new options that control stitch-specific features
+
+* ``--no-standalone``
+* ``--no-self-contained``
+
 Examples
 --------
 
