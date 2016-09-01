@@ -239,6 +239,10 @@ class Stitch:
                     block = RawBlock('html', data)
                 elif key.startswith('image'):
                     block = self.wrap_image_output(chunk_name, data, key, attrs)
+                else:
+                    # fallback
+                    to = self.to if self.to != 'pdf' else 'latex'
+                    block = RawBlock(to, data)
 
             output_blocks.append(block)
         return output_blocks
